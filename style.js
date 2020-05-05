@@ -1,34 +1,24 @@
-/*//////////////////////
-	*
-	* SCROLLMAGIC STARTS
-	*
-	*//////////////////////
-	// init controller
-	var controller = new ScrollMagic.Controller();
-
- //flow
-  $(".flow").each(function(){
-    $(this).addClass('out');
-    new ScrollMagic.Scene({
-      triggerElement: this,
-      triggerHook: 0,
-      duration: 600
-    })
-    .on("enter", function(ev){$(ev.target.triggerElement()).removeClass('out');})
-    .on("leave", function(ev){$(ev.target.triggerElement()).addClass('out');})
-    .addTo(controller);
-  });
-
- //fade
-  $(".fade").each(function(){
-    $(this).addClass('out');
-    new ScrollMagic.Scene({
-      triggerElement: this,
-      triggerHook: 0.65
-    })
-    .on("enter", function(ev){$(ev.target.triggerElement()).removeClass('out');})
-    .on("leave", function(ev){$(ev.target.triggerElement()).addClass('out');})
-    .addTo(controller);
-  });
-
-$('.container').removeClass('out');
+/* FadeIn Scroll */
+$(document).ready(function() {
+    
+    /* Every time the window is scrolled ... */
+    $(window).scroll( function(){
+    
+        /* Check the location of each desired element */
+        $('.fade').each( function(i){
+            
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            
+            /* If the object is completely visible in the window, fade it it */
+            if( bottom_of_window > bottom_of_object ){
+                
+                $(this).animate({'opacity':'1'},900);
+                    
+            }
+            
+        }); 
+    
+    });
+    
+});
